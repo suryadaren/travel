@@ -36,25 +36,25 @@
                 <div class="col-sm-4 invoice-col">
                   <strong>Keberangkatan</strong>
                   <address>
-                    Malang - Surabaya<br>
-                    25 April 2020 | 14:00<br>
+                    {{$pemesanan->jadwal->kota_asal->nama}} - {{$pemesanan->jadwal->kota_tujuan->nama}}<br>
+                    {{$pemesanan->jadwal->tanggal_berangkat}} | {{$pemesanan->jadwal->jam_berangkat}}<br>
                   </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
                   <strong>Data Pemesan</strong>
                   <address>
-                    Andre putra<br>
-                    Email : andreOk@gmail.com<br>
-                    Hp : 085212341234<br>
+                    {{$pemesanan->customer->nama}}<br>
+                    Email : {{$pemesanan->customer->email}}<br>
+                    Hp : {{$pemesanan->customer->nomor_telepon}}<br>
                   </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
                   <strong>Ticket</strong>
-                  <b>Kode Boking : </b>AS123BG45<br>
-                  <b>Status : </b> <small class="badge badge-warning"></i>Menunggu Verifikasi</small><br>
-                  <b>Tanggal pemesanan : </b> 2 Maret 2020 | 12:00<br>
+                  <b>Kode Boking : </b>{{$pemesanan->id}}<br>
+                  <b>Status : </b> <small class="badge badge-warning"></i>{{$pemesanan->status}}</small><br>
+                  <b>Tanggal pemesanan : </b> {{$pemesanan->created_at}}<br>
                 </div>
                 <!-- /.col -->
               </div>
@@ -72,21 +72,17 @@
                     <tr>
                       <th>Nama</th>
                       <th>Nomor KTP</th>
+                      <th>Jenis Kelamin</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>Yudi Perdana</td>
-                      <td>123132132</td>
-                    </tr>
-                    <tr>
-                      <td>Eko Yulianto</td>
-                      <td>123123121</td>
-                    </tr>
-                    <tr>
-                      <td>Yuni Suci</td>
-                      <td>123120930</td>
-                    </tr>
+                      @foreach($pemesanan->penumpangs as $penumpang)
+                        <tr>
+                          <td>{{$penumpang->nama}}</td>
+                          <td>{{$penumpang->nomor_ktp}}</td>
+                          <td>{{$penumpang->jenis_kelamin}}</td>
+                        </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -94,24 +90,28 @@
               </div>
               <!-- /.row -->
 
+              
               <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-12">
                   <br>
                   <h5><strong>Foto Bukti Transfer : </strong></h5>
-                  <img src="/operator/dist/img/bukti.jpg" width="500px" alt="bukti transfer">
+                  <img src="{{Storage::url($pemesanan->bukti_pembayaran)}}" width="500px" alt="bukti transfer">
                 </div>
                 <!-- /.col -->
               </div>
               <!-- /.row -->
 
+              @if($pemesanan->status == "menunggu verifikasi pembayaran")
               <!-- this row will not appear when printing -->
-              <div class="row no-print">
-                <div class="col-12">
-                  <button type="button" onclick="verifikasi('1')" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Verifikasi Pembayaran
-                  </button>
+                <div class="row no-print" style="margin: 20px 0">
+                  <div class="col-12">
+                    <p><strong>Silahkan Verifikasi pembayaran jika pembayaran telah diterima</strong></p>
+                    <button type="button" onclick="verifikasi('{{$pemesanan->id}}')" class="btn btn-success float-left"><i class="fas fa-check"></i> Verifikasi Pembayaran
+                    </button>
+                  </div>
                 </div>
-              </div>
+              @endif
             </div>
             <!-- /.invoice -->
           </div><!-- /.col -->
@@ -132,11 +132,11 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Apakah anda yakin ingin menghapus memverifikasi pembayaran ini ?</p>
+              <p>Apakah anda yakin ingin memverifikasi pembayaran ini ?</p>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-              <form name="form_verifikasi" action="/operators/verifikasi" method="post">
+              <form name="form_verifikasi" action="/operators/verifikasi_pembayaran" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="id">
               <input type="submit" class="btn btn-success" value="Ya">

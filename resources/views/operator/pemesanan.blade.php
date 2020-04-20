@@ -33,29 +33,26 @@
                 <thead>
                 <tr>
                   <th>Kode Booking</th>
-                  <th>Mobil</th>
+                  <th>Keberangkatan</th>
                   <th>Tanggal Berangkat</th>
-                  <th>Tanggal Pemesanan</th>
                   <th>Nama Pemesan</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
-                	<tr>
-                		<td>13AS281AP</td>
-                		<td>Avanza</td>
-                		<td>24 maret 2020 12:00</td>
-                		<td>23 Maret 2020 15:00</td>
-                		<td>Bimo</td>
-                		<td><small class="badge badge-warning"></i>Booking</small></td>
-                		<td>
-                      <a href="/operators/lihat_pemesanan/1" class="btn btn-primary">Lihat</a>
-                      <a onclick="hapus('1')" class="btn btn-danger">hapus</a>
+                  @foreach($pemesanans as $pemesanan)
+                  <tr>
+                    <td>{{$pemesanan->id}}</td>
+                    <td>{{$pemesanan->jadwal->kota_asal->nama}} - {{$pemesanan->jadwal->kota_tujuan->nama}}</td>
+                    <td>{{$pemesanan->jadwal->tanggal_berangkat}} | {{$pemesanan->jadwal->jam_berangkat}}</td>
+                    <td>{{$pemesanan->customer->nama}}</td>
+                    <td><small class="badge badge-warning"></i>{{$pemesanan->status}}</small></td>
+                    <td>
+                      <a href="/operators/lihat_pemesanan/{{$pemesanan->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     </td>
-                	</tr>
-                	@endfor
+                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

@@ -1,6 +1,6 @@
 @extends('operator.layout')
 
-@section('title','Tambah Kota Tujuan')
+@section('title','Tambah Kota')
 
 @section('content')
 
@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tambah Data Kota Tujuan</h1>
+            <h1>Tambah Data Kota</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -26,11 +26,12 @@
           
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Masukan Data Kota Tujuan</h3>
+                <h3 class="card-title">Masukan Data Kota</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form-horizontal">
+              <form class="form-horizontal" action="/operators/simpan_kota" method="post">
+                {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Kota</label>
@@ -38,12 +39,18 @@
                       <input type="text" name="nama" class="form-control" id="inputEmail3" placeholder="Masukan Nama Kota">
                     </div>
                   </div>
+                  @if($errors->has('nama'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('nama')}} </div>
+                  @endif
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Kode Kota</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPassword3" placeholder="Masukan Kode Kota (Unik)" name="kode">
+                      <input type="text" class="form-control" id="inputPassword3" id="kode" placeholder="Masukan Kode Kota (Unik)" name="kode">
                     </div>
                   </div>
+                  @if($errors->has('kode'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('kode')}} </div>
+                  @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -66,20 +73,10 @@
 
 <!-- page script -->
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+  $(document).ready(function(){
+    $('input[type=text]').val (function () {
+        return this.value.toUpperCase();
+    })
   });
 </script>
 @endsection

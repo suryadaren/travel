@@ -34,26 +34,31 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Asal</th>
+                  <th>Tujuan</th>
                   <th>Mobil</th>
-                  <th>Plat Mobil</th>
-                  <th>Sopir</th>
-                  <th>Tanggal Berangkat</th>
+                  <th>Berangkat</th>
+                  <th>Kursi Tersedia</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
+                	@foreach($jadwals as $jadwal)
                 	<tr>
-                    <td>Avanza</td>
-                		<td>N 1243 OP</td>
-                		<td>Yadi</td>
-                		<td>24 maret 2020 12:00</td>
+                    <td>{{$jadwal->kota_asal->nama}}</td>
+                    <td>{{$jadwal->kota_tujuan->nama}}</td>
+                    <td>{{$jadwal->mobil->merk}}</td>
+                    <td>{{$jadwal->tanggal_berangkat}} {{$jadwal->jam_berangkat}}</td>
+                    <td>{{$jadwal->kursi_tersedia}}</td>
+                    <td><span class="badge badge-success">{{$jadwal->status}}</span></td>
                 		<td>
-                      <a href="/operators/edit_jadwal/1" class="btn btn-warning">Edit</a>
-                      <a onclick="hapus('1')" class="btn btn-danger">Hapus</a>
+                      <a href="/operators/lihat_jadwal/{{$jadwal->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                      <a href="/operators/edit_jadwal/{{$jadwal->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                      <a onclick="hapus('{{$jadwal->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 	</tr>
-                	@endfor
+                	@endforeach
                 </tbody>
               </table>
             </div>
@@ -67,6 +72,33 @@
     </section>
     <!-- /.content -->
   </div>
+
+
+  <div class="modal fade" id="hapus">
+        <div class="modal-dialog">
+          <div class="modal-content bg-default">
+            <div class="modal-header">
+              <h4 class="modal-title">Hapus Data</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Apakah anda yakin ingin menghapus data jadwal ini ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+              <form name="form_hapus" action="/operators/hapus_jadwal" method="post">
+                {{csrf_field()}}
+                <input type="hidden" name="id">
+              <input type="submit" class="btn btn-danger" value="Ya">
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
 @endsection
 
 @section('js')
@@ -88,5 +120,11 @@
       "responsive": true,
     });
   });
+</script>
+<script>
+  function hapus(id){
+    document.forms['form_hapus']['id'].value=id;
+    $('#hapus').modal();
+  }
 </script>
 @endsection

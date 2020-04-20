@@ -30,32 +30,47 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form-horizontal">
+              <form class="form-horizontal" method="post" action="/operators/update_mobil" enctype="multipart/form-data">
+                {{csrf_field()}}
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="id" value="{{$mobil->id}}">
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Mobil</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Merk</label>
                     <div class="col-sm-10">
-                      <input type="text" name="nama" class="form-control" id="inputEmail3" Value="Avanza">
+                      <input type="text" name="merk" class="form-control" id="inputEmail3" placeholder="Masukan Merk Mobil" value="{{$mobil->merk}}">
                     </div>
                   </div>
+                  @if($errors->has('merk'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('merk')}} </div>
+                  @endif
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Plat Mobil</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Plat</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPassword3" Value="N 1212 IU" name="plat">
+                      <input  value="{{$mobil->plat}}" type="text" class="form-control" id="inputPassword3" placeholder="Masukan Plat Mobil (Unik)" name="plat">
                     </div>
                   </div>
+                  @if($errors->has('plat'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('plat')}} </div>
+                  @endif
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Warna Mobil</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Warna</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPassword3" Value="Biru" name="warna">
+                      <input  value="{{$mobil->warna}}" type="text" class="form-control" id="inputPassword3" placeholder="Masukan Warna Mobil" name="warna">
                     </div>
                   </div>
+                  @if($errors->has('warna'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('warna')}} </div>
+                  @endif
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Foto Mobil</label>
                     <div class="col-sm-10">
-                      <input type="file" class="form-control" id="inputPassword3">
+                      <input  type="file" class="form-control" id="inputPassword3" placeholder="Masukan Warna Mobil" name="foto">
                     </div>
                   </div>
+                  @if($errors->has('foto'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('foto')}} </div>
+                  @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -72,26 +87,4 @@
     </section>
     <!-- /.content -->
   </div>
-@endsection
-
-@section('js')
-
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
 @endsection

@@ -35,22 +35,22 @@
                 <thead>
                 <tr>
                   <th style="width: 20%">Plat</th>
-                  <th style="width: 50%">Nama</th>
+                  <th style="width: 50%">Merk</th>
                   <th style="width: 30%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
+                	@foreach($mobils as $mobil)
                 	<tr>
-                		<td>N 1231 OI</td>
-                		<td>Avanza</td>
+                		<td>{{$mobil->plat}}</td>
+                		<td>{{$mobil->merk}}</td>
                 		<td>
-                      <a href="/operators/lihat_mobil/1" class="btn btn-primary">Lihat</a>
-                      <a href="/operators/edit_mobil/1" class="btn btn-warning">Edit</a>
-                      <a onclick="hapus('1')" class="btn btn-danger">Hapus</a>
+                      <a href="/operators/lihat_mobil/{{$mobil->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                      <a href="/operators/edit_mobil/{{$mobil->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                      <a onclick="hapus('{{$mobil->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 	</tr>
-                	@endfor
+                	@endforeach
                 </tbody>
               </table>
             </div>

@@ -13,42 +13,33 @@
                         
                             <div class="flex-content">
                                 <div class="custom-form custom-form-fields">
-                                    <h3>Customer Data</h3>
-                                    <p>Input Customer Data Please!</p>
-                                    <form>
-                                            
+                                    <h3>Data Penumpang</h3>
+                                    <p>Silahkan Masukan Data Penumpang!</p>
+                                    <form action="/customers/informasi_pemesanan" method="get">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="jadwal_id" value="{{$jadwal->id}}">
+
+                                        @for($i = 1; $i <= $jumlah ; $i++)
+
+                                        <label>Penumpang {{$i}}</label> 
                                         <div class="form-group">
-                                             <input type="text" class="form-control" placeholder="Username"  required/>
+                                             <input type="text" name="nama_penumpang[]" class="form-control" placeholder="Nama Penumpang"  required/>
                                              <span><i class="fa fa-user"></i></span>
                                         </div>
-        
                                         <div class="form-group">
-                                             <input type="email" class="form-control" placeholder="Email"  required/>
-                                             <span><i class="fa fa-envelope"></i></span>
+                                             <input type="text" name="nomor_ktp[]" class="form-control" placeholder="Nomor KTP"  required/>
+                                             <span><i class="fa fa-id-card"></i></span>
                                         </div>
-        
                                         <div class="form-group">
-                                             <input type="text" class="form-control" placeholder="Telephone"  required/>
-                                             <span><i class="fa fa-phone"></i></span>
-                                        </div>
-        
-                                        <div class="form-group">
-                                             <input type="text" class="form-control" placeholder="Address"  required/>
-                                             <span><i class="fa fa-address-card"></i></span>
-                                        </div>
-        
-                                        <div class="form-group">
-                                             <input type="text" class="form-control" placeholder="Passenger 1"  required/>
-                                             <span><i class="fa fa-user"></i></span>
-                                        </div>
-        
-                                        <div class="form-group">
-                                             <input type="text" class="form-control" placeholder="Passenger 2"  required/>
-                                             <span><i class="fa fa-user"></i></span>
+                                             <select name="jenis_kelamin[]" class="form-control">
+                                                 <option value="laki-laki">Laki-laki</option>
+                                                 <option value="perempuan">perempuan</option>
+                                             </select>
                                         </div>
                                         
-                                        <!-- <button class="btn btn-orange btn-block">Submit</button> -->
-                                        <a href="/bayar" class="btn btn-orange btn-block">Submit</a>
+                                        @endfor
+
+                                        <button class="btn btn-orange btn-block">Simpan</button>
                                     </form>
                                 </div><!-- end custom-form -->
                             </div><!-- end form-content -->

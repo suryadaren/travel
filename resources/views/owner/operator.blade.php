@@ -35,24 +35,24 @@
                 <thead>
                 <tr>
                   <th>Nama</th>
-                  <th>Nomor KTP</th>
                   <th>Email</th>
-                  <th>Action</th>
+                  <th>Nomor Telepon</th>
+                  <th style="width: 25%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
+                	@foreach($operators as $operator)
                 	<tr>
-                		<td>Budi</td>
-                    <td>131928129128</td>
-                    <td>budi123@gmail.com</td>
+                		<td>{{$operator->nama}}</td>
+                    <td>{{$operator->email}}</td>
+                    <td>{{$operator->nomor_telepon}}</td>
                 		<td>
-                      <a href="/owners/lihat_operator/1" class="btn btn-primary">Lihat</a>
-                      <a href="/owners/edit_operator/1" class="btn btn-warning">Edit</a>
-                      <a onclick="hapus('1')" class="btn btn-danger">Hapus</a>
+                      <a href="/owners/lihat_operator/{{$operator->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                      <a href="/owners/edit_operator/{{$operator->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                      <a onclick="hapus('{{$operator->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 	</tr>
-                	@endfor
+                	@endforeach
                 </tbody>
               </table>
             </div>

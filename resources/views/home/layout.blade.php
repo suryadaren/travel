@@ -28,6 +28,7 @@
         
         <!-- Magnific Gallery -->
         <link rel="stylesheet" href="/home/css/magnific-popup.css">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
         @yield('css')
     </head>
@@ -54,12 +55,26 @@
                 
                 <div class="collapse navbar-collapse" id="myNavbar1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Home</a>			
+                        <li><a href="/">Home</a>			
                         </li>
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">My Pages</a>			
+                        @if(auth()->guard('customer')->check())
+                        <li><a href="/customers">My Pages</a>           
                         </li>
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>			
+                            <li><a href="/customers/logout">Logout</a></li>
+                        @elseif(auth()->guard('owner')->check())
+                        <li><a href="/owners">My Pages</a>           
                         </li>
+                            <li><a href="/owners/logout">Logout</a></li>
+                        @elseif(auth()->guard('operator')->check())
+                        <li><a href="/operators">My Pages</a>           
+                        </li>
+                            <li><a href="/operators/logout">Logout</a></li>
+                        @else
+                            <li><a href="/register">Register</a>          
+                            </li>
+                            <li><a href="/login">Login</a>			
+                            </li>
+                        @endif
                     </ul>
                 </div><!-- end navbar collapse -->
             </div><!-- end container -->
@@ -76,11 +91,13 @@
                     
                     <div class="list-group panel">
                     
-                        <a href="#home-links" class="list-group-item active" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-home link-icon"></i></span>Home</a>
+                        <a href="/" class="list-group-item active" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-home link-icon"></i></span>Home</a>
                         
                         <a href="#cars-links" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-clone link-icon"></i></span>My Pages</a>
                         
-                        <a href="#pages-links" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-user link-icon"></i></span>Login</a>
+                        <a href="#cars-links" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-clone link-icon"></i></span>Register</a>
+                        
+                        <a href="/login" class="list-group-item" data-toggle="collapse" data-parent="#main-menu"><span><i class="fa fa-user link-icon"></i></span>Login</a>
                     </div><!-- end list-group -->
                 </div><!-- end main-menu -->
             </div><!-- end mySidenav -->
@@ -120,6 +137,21 @@
         <script src="/home/js/custom-navigation.js"></script>
         <script src="/home/js/custom-flex.js"></script>
         <script src="/home/js/custom-date-picker.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script>
+          @if(Session::has('message'))
+            var type="{{Session::get('alert-type','success')}}"
+          
+            switch(type){
+              case 'success':
+               toastr.info("{{ Session::get('message') }}");
+               break;
+            case 'error':
+              toastr.error("{{ Session::get('message') }}");
+              break;
+            }
+          @endif
+        </script>
         <!-- Page Scripts Ends -->
 
         @yield('js')

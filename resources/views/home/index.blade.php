@@ -41,23 +41,33 @@
                             <div class="tab-content">
 
                                 <div id="flights" class="tab-pane in active">
-                                    <form>
+                                    <form action="/cari_jadwal" method="get">
                                         <div class="row">
 
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                                                 <div class="row">
                                                 
                                                     <div class="col-xs-12 col-sm-6 col-md-6">
-                                                        <div class="form-group left-icon">
-                                                            <input type="text" class="form-control" placeholder="From" >
-                                                            <i class="fa fa-map-marker"></i>
+                                                        <div class="form-group right-icon">
+                                                            <select name="kota_asal" id="kota_asal" class="form-control">
+                                                                <option class="form-control" value="">(Pilih Kota Asal)</option>
+                                                                @foreach($kota as $kot)
+                                                                <option class="form-control" value="{{$kot->id}}">{{$kot->nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <i class="fa fa-map-marker"> </i>
                                                         </div>
                                                     </div><!-- end columns -->
                                                     
                                                     <div class="col-xs-12 col-sm-6 col-md-6">
-                                                        <div class="form-group left-icon">
-                                                            <input type="text" class="form-control" placeholder="To" >
-                                                            <i class="fa fa-map-marker"></i>
+                                                        <div class="form-group right-icon">
+                                                            <select name="kota_tujuan" id="kota_tujuan" class="form-control">
+                                                                <option class="form-control" value="">(Pilih Kota Tujuan)</option>
+                                                                @foreach($kota as $ko)
+                                                                <option class="form-control" value="{{$ko->id}}">{{$ko->nama}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <i class="fa fa-map-marker"> </i>
                                                         </div>
                                                     </div><!-- end columns -->
         
@@ -69,18 +79,19 @@
                                                 
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group left-icon">
-                                                            <input type="text" class="form-control dpd1" placeholder="Date" >
+                                                            <input type="text" class="form-control dpd1" name="tanggal" placeholder="Date" >
                                                             <i class="fa fa-calendar"></i>
                                                         </div>
                                                     </div><!-- end columns -->
                                                     
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group right-icon">
-                                                            <select class="form-control">
+                                                            <select class="form-control" name="jumlah">
                                                                 <option selected>People</option>
                                                                 <option>1</option>
                                                                 <option>2</option>
                                                                 <option>3</option>
+                                                                <option>4</option>
                                                             </select>
                                                             <i class="fa fa-angle-down"></i>
                                                         </div>
@@ -91,7 +102,7 @@
                                             
                                             
                                             <div class=" text-right col-xs-12 col-sm-12 col-md-12 col-lg-2 search-btn">
-                                                <a href="/jadwal" class="btn btn-orange">Search</a>
+                                                <input type="submit" class="btn btn-orange" value="Cari Jadwal">
                                             </div><!-- end columns -->
                                             
                                         </div><!-- end row -->
@@ -106,4 +117,20 @@
             </div><!-- end search-tabs -->
             
         </section><!-- end flexslider-container -->
+@endsection
+
+@section('js')
+<script>
+  $(document).ready(function(){
+    var id;
+    $('#kota_asal').change(function(){
+      id = $(this).val();
+      $("#kota_tujuan option[value='"+id+"']").each(function() {
+          $("#kota_tujuan option").prop('disabled', false);
+          $(this).prop('disabled', 'disabled');
+          $("#kota_tujuan option[value='']").prop('disabled', "disabled");
+      });
+    });
+  });
+</script>
 @endsection

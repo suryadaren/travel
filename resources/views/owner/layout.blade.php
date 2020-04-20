@@ -44,10 +44,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/operator/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{Storage::url(auth()->guard('owner')->user()->foto)}}" class="img-circle elevation-2" alt="img">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{auth()->guard('owner')->user()->nama}}</a>
         </div>
       </div>
 
@@ -58,6 +58,14 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
             <a href="/owners" class="nav-link {{ (request()->is('owners')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profil
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/owners/pendapatan" class="nav-link {{ (request()->is('owners/pendapatan')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-money-check-alt"></i>
               <p>
                 Pendapatan

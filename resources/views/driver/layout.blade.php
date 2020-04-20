@@ -65,6 +65,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="/drivers/jadwal" class="nav-link {{ (request()->is('drivers/jadwal')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p>
+                Jadwal Anda
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="/drivers/riwayat" class="nav-link {{ (request()->is('drivers/riwayat')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-ticket-alt"></i>

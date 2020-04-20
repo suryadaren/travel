@@ -89,23 +89,5 @@
 	  });
 	});
 
-	// Color Picker
-	mainDocument.on('ready', function(){
-		colorPanel.ColorPanel({
-			styleSheet: '#cpswitch'
-            , colors: {
-                '#faa61a': 'css/orange.css'
-                , '#00adef': 'css/lightblue.css'
-				, '#a6ce39': 'css/green.css'
-                , '#e62a2b': 'css/red.css'
-                , '#cc6699': 'css/purple.css'
-				, '#00cc99': 'css/caribbean-green.css'
-				, '#00cccc': 'css/egg-blue.css'
-				, '#ff884d': 'css/atomic.css'
-            , }
-            , linkClass: 'linka'
-            , animateContainer: false
-		});
-	});
 
 })(jQuery);

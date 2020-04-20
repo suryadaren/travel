@@ -34,25 +34,25 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th style="width: 30%">Nama</th>
-                  <th style="width: 20%">Nomor KTP</th>
-                  <th style="width: 20%">Nomor SIM</th>
-                  <th style="width: 30%">Action</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Nomor Telepon</th>
+                  <th style="width: 25%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
+                	@foreach($sopirs as $sopir)
                 	<tr>
-                		<td>Budi</td>
-                    <td>131928129128</td>
-                		<td>123128318928391</td>
+                		<td>{{$sopir->nama}}</td>
+                    <td>{{$sopir->email}}</td>
+                    <td>{{$sopir->nomor_telepon}}</td>
                 		<td>
-                      <a href="/operators/lihat_sopir/1" class="btn btn-primary">Lihat</a>
-                      <a href="/operators/edit_sopir/1" class="btn btn-warning">Edit</a>
-                      <a onclick="hapus('1')" class="btn btn-danger">Hapus</a>
+                      <a href="/operators/lihat_sopir/{{$sopir->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                      <a href="/operators/edit_sopir/{{$sopir->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                      <a onclick="hapus('{{$sopir->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 	</tr>
-                	@endfor
+                	@endforeach
                 </tbody>
               </table>
             </div>

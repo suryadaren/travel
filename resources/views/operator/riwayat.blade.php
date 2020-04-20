@@ -32,6 +32,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Keberangkatan</th>
                   <th>Mobil</th>
                   <th>Plat Mobil</th>
                   <th>Sopir</th>
@@ -40,17 +41,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
-                	<tr>
-                    <td>Avanza</td>
-                		<td>N 1243 OP</td>
-                		<td>Yadi</td>
-                		<td>24 desember 2019 12:00</td>
-                		<td>
-                      <a href="/operators/lihat_riwayat/1" class="btn btn-primary">Lihat</a>
+                  @foreach($jadwals as $jadwal)
+                  <tr>
+                    <td>{{$jadwal->kota_asal->nama}} - {{$jadwal->kota_tujuan->nama}}</td>
+                    <td>{{$jadwal->mobil->merk}}</td>
+                    <td>{{$jadwal->mobil->plat}}</td>
+                    <td>{{$jadwal->sopir->nama}}</td>
+                    <td>{{$jadwal->tanggal_berangkat}} {{$jadwal->jam_berangkat}}</td>
+                    <td>
+                      <a href="/operators/lihat_riwayat/{{$jadwal->id}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     </td>
-                	</tr>
-                	@endfor
+                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

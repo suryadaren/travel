@@ -1,6 +1,6 @@
 @extends('operator.layout')
 
-@section('title','Kota Asal')
+@section('title','Kota')
 
 @section('content')
 
@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Kota Asal</h1>
+            <h1>Data Kota</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -25,11 +25,11 @@
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Kota Asal</h3>
+              <h3 class="card-title">Daftar Kota</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <a href="/operators/tambah_kota_asal" class="btn btn-primary">Tambah Kota</a>
+              <a href="/operators/tambah_kota" class="btn btn-primary">Tambah Kota</a>
               <br><br>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -40,16 +40,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                	@for($i=0;$i<100;$i++)
+                	@foreach($kotas as $kota)
                 	<tr>
-                		<td>Surabaya</td>
-                		<td>sby</td>
+                		<td>{{$kota->nama}}</td>
+                		<td>{{$kota->kode}}</td>
                 		<td>
-                      <a href="/operators/edit_kota_asal/1" class="btn btn-warning">Edit</a>
-                      <a onclick="hapus('1')" class="btn btn-danger">Hapus</a>
+                      <a href="/operators/edit_kota/{{$kota->id}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                      <a onclick="hapus('{{$kota->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 	</tr>
-                	@endfor
+                	@endforeach
                 </tbody>
               </table>
             </div>
@@ -78,7 +78,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-              <form name="form_hapus" action="/operators/hapus_kota_asal" method="post">
+              <form name="form_hapus" action="/operators/hapus_kota" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="id">
               <input type="submit" class="btn btn-danger" value="Ya">

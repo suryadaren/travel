@@ -44,10 +44,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/operator/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{Storage::url(auth()->guard('operator')->user()->foto)}}" class="img-circle elevation-2" alt="img">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{auth()->guard('operator')->user()->nama}}</a>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
             <a href="/operators" class="nav-link {{ (request()->is('operators')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Profil
               </p>
             </a>
           </li>
@@ -90,27 +90,12 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="/operators/kota" class="nav-link {{ (request()->is('operators/kota')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-city"></i>
               <p>
                 Kota
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/operators/kota_asal" class="nav-link {{ (request()->is('operators/kota_asal')) ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Asal</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/operators/kota_tujuan" class="nav-link {{ (request()->is('operators/kota_tujuan')) ? 'active' : '' }}">
-                  <i class="fas fa-caret-right nav-icon"></i>
-                  <p>Tujuan</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="/operators/mobil" class="nav-link {{ (request()->is('operators/mobil')) ? 'active' : '' }}">

@@ -30,7 +30,8 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form-horizontal">
+              <form class="form-horizontal" action="/owners/simpan_operator" method="post" enctype="multipart/form-data">
+                {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
@@ -38,48 +39,54 @@
                       <input type="text" name="nama" class="form-control" id="inputEmail3" placeholder="Masukan Nama">
                     </div>
                   </div>
+                  @if($errors->has('nama'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('nama')}} </div>
+                  @endif
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
                       <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Masukan Email">
                     </div>
                   </div>
+                  @if($errors->has('email'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('email')}} </div>
+                  @endif
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input type="password" name="password" class="form-control" id="inputEmail3" placeholder="Masukan Nama">
+                      <input type="password" name="password" class="form-control" id="inputEmail3" placeholder="Masukan Password">
                     </div>
                   </div>
+                  @if($errors->has('password'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('password')}} </div>
+                  @endif
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nomor KTP</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nomor Telepon</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPassword3" placeholder="Masukan Nomor KTP" name="nomor_ktp">
+                      <input type="text" class="form-control" id="inputPassword3" placeholder="Masukan Nomor Telepon" name="nomor_telepon">
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control" id="inputPassword3" placeholder="Masukan Tanggal Lahir" name="tgl_lahir">
-                    </div>
-                  </div>
+                  @if($errors->has('nomor_telepon'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('nomor_telepon')}} </div>
+                  @endif
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputPassword3" placeholder="Masukan Alamat" name="alamat">
                     </div>
                   </div>
+                  @if($errors->has('alamat'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('alamat')}} </div>
+                  @endif
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Foto Diri</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
-                      <input type="file" class="form-control" id="inputPassword3" placeholder="Masukan Warna Mobil" name="foto">
+                      <input type="file" class="form-control" id="inputPassword3" placeholder="Masukan Foto" name="foto">
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Foto KTP</label>
-                    <div class="col-sm-10">
-                      <input type="file" class="form-control" id="inputPassword3" placeholder="Masukan Warna Mobil" name="foto_ktp">
-                    </div>
-                  </div>
+                  @if($errors->has('foto'))
+                    <div class="alert alert-danger" role="alert"> {{$errors->first('foto')}} </div>
+                  @endif
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info float-right">Simpan</button>
@@ -95,26 +102,4 @@
     </section>
     <!-- /.content -->
   </div>
-@endsection
-
-@section('js')
-
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
 @endsection

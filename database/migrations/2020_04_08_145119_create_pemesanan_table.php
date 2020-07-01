@@ -14,7 +14,7 @@ class CreatePemesananTable extends Migration
     public function up()
     {
         Schema::create('pemesanan', function (Blueprint $table) {
-            $table->BigInteger('id');
+            $table->id();
 
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('jadwal_id');
@@ -25,7 +25,6 @@ class CreatePemesananTable extends Migration
             $table->string('status');
             $table->timestamps();
 
-            $table->primary('id');
             $table->foreign('customer_id')
                 ->references('id')->on('user')
                 ->onDelete('cascade');
